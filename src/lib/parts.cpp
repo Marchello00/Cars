@@ -1,4 +1,6 @@
+#ifndef PARTS_ADDED
 #include "parts.h"
+#endif
 
 int CStreetPart::getCost() const {
     return summarize<EStreetPartCost>();
@@ -12,9 +14,23 @@ int CSuperPart::getCost() const {
     return summarize<ESuperPartCost>();
 }
 
+std::shared_ptr<CPart> correctTypeChoiser(ECarType carType, EPartType partType) {
+    switch (carType) {
+        case ECarType::STREET: {
+            return std::make_shared<CStreetPart>(partType);
+        }
+        case ECarType::RACE: {
+            return std::make_shared<CRacePart>(partType);
+        }
+        case ECarType::SUPER: {
+            return std::make_shared<CSuperPart>(partType);
+        }
+    }
+}
+
 template<typename T>
 std::shared_ptr<CPart> CPartsFactory::choice_create(EPartType partType) const {
-    auto part = std::make_shared<CPart>();
+    std::shared_ptr<CPart> part = correctTypeChoiser(T::TYPE, partType);
     switch (partType) {
         case EPartType::ENGINE: {
             part->initialize<typename T::ENGINE>();
@@ -49,7 +65,7 @@ std::shared_ptr<CPart> CPartsFactory::choice_create(EPartType partType) const {
             break;
         }
     }
-    return std::shared_ptr<CPart>();
+    return part;
 }
 
 std::shared_ptr<CPart> CStreetPartsFactory::create(EPartType partType) const {

@@ -41,17 +41,8 @@ fetch_googletest(
 
 enable_testing()
 
-add_executable(TestBuilder builder_test.cpp)
+add_executable(TestBuilder construct_test.cpp)
 
 target_link_libraries(TestBuilder gtest_main base)
 
-#add_test(
-#        NAME BuilderTest
-#        COMMAND ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR}/TestBuilder
-#)
-#
-#add_test(
-#        NAME BuilderTest2
-#        COMMAND ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR}/TestBuilder
-#)
-
+include_directories(../src/lib)

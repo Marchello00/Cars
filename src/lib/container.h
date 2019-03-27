@@ -2,7 +2,8 @@
 #define CARS_CONTAINER_H
 
 #include <vector>
-#include "base.h"
+#include "cars.h"
+#include "parts.h"
 
 class CarHolder {
 private:
@@ -11,7 +12,7 @@ private:
 
 class PartHolder {
 private:
-    std::vector<CPart *> part;
+    std::vector<CPart *> parts;
 };
 
 #endif //CARS_CONTAINER_H

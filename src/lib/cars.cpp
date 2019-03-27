@@ -1,4 +1,6 @@
+#ifndef CAR_ADDED
 #include "cars.h"
+#endif
 
 std::shared_ptr<CPart> ICarBuilder::addPart(std::shared_ptr<CPart> part) {
     auto &place = parts[part->partType];
@@ -22,6 +24,10 @@ std::shared_ptr<CPart> ICarBuilder::delPart(EPartType partType) {
     auto oldPart = place;
     place = nullptr;
     return oldPart;
+}
+
+std::shared_ptr<CCar> ICarBuilder::getCar() {
+    return car;
 }
 
 bool CStreetCar::addPart(std::shared_ptr<CPart> &part) {
@@ -74,6 +80,7 @@ void CSuperCar::delPart(std::shared_ptr<CPart> &part) {
 }
 
 void IStreetCarBuilder::create(ECarName name) {
+    car = std::make_shared<CStreetCar>();
     switch (name) {
         case ECarName::PEPPER: {
             car->initialize<EStreetCars::PEPPER>();
@@ -86,6 +93,7 @@ void IStreetCarBuilder::create(ECarName name) {
 }
 
 void IRaceCarBuilder::create(ECarName name) {
+    car = std::make_shared<CRaceCar>();
     switch (name) {
         case ECarName::OVERRUNNER: {
             car->initialize<typename ERaceCars::OVERRUNNER>();
@@ -98,6 +106,7 @@ void IRaceCarBuilder::create(ECarName name) {
 }
 
 void ISuperCarBuilder::create(ECarName name) {
+    car = std::make_shared<CSuperCar>();
     switch (name) {
         case ECarName::THUNDERBOLT: {
             car->initialize<typename ESuperCars::THUNDERBOLT>();

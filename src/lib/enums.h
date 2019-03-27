@@ -58,6 +58,8 @@ enum class ESuperPartCost: int {
 
 class EStreetParts {
 public:
+    static const ECarType TYPE = ECarType::STREET;
+
     enum class ENGINE {
         MAX_SPEED = 20,
         ACCELERATION = 3,
@@ -149,6 +151,8 @@ public:
 
 class ERaceParts {
 public:
+    static const ECarType TYPE = ECarType::RACE;
+
     enum class ENGINE {
         MAX_SPEED = 20,
         ACCELERATION = 3,
@@ -240,6 +244,8 @@ public:
 
 class ESuperParts {
 public:
+    static const ECarType TYPE = ECarType::SUPER;
+
     enum class ENGINE {
         MAX_SPEED = 10,
         ACCELERATION = 2,
@@ -372,6 +378,5 @@ public:
         DAMAGE = 0
     };
 };
-
 
 #endif //CARS_ENUMS_H

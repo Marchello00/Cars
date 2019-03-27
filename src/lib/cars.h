@@ -15,6 +15,8 @@ public:
 
     explicit CCar(ECarType carType) :
             CBase(carType) {}
+
+    virtual ~CCar() = default;
 };
 
 class CStreetCar : public CCar {
@@ -54,18 +56,35 @@ public:
     std::shared_ptr<CPart> addPart(std::shared_ptr<CPart> part);
 
     std::shared_ptr<CPart> delPart(EPartType partType);
+
+    std::shared_ptr<CCar> getCar();
+
+    virtual ~ICarBuilder() = default;
 };
 
-class IStreetCarBuilder: public ICarBuilder {
+class IStreetCarBuilder : public ICarBuilder {
+public:
     void create(ECarName name) override;
+
+    ~IStreetCarBuilder() override = default;
 };
 
-class IRaceCarBuilder: public ICarBuilder {
+class IRaceCarBuilder : public ICarBuilder {
+public:
     void create(ECarName name) override;
+
+    ~IRaceCarBuilder() override = default;
 };
 
-class ISuperCarBuilder: public ICarBuilder {
+class ISuperCarBuilder : public ICarBuilder {
+public:
     void create(ECarName name) override;
+
+    ~ISuperCarBuilder() override = default;
 };
+
+#define CARS_ADDED
+
+#include "cars.cpp"
 
 #endif //CARS_CARS_H
