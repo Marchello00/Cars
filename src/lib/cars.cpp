@@ -1,25 +1,5 @@
 #include "cars.h"
 
-void ICarBuilder::create(int carType) {
-    switch (carType) {
-        case ECarType::STREET: {
-            car = std::make_shared<CStreetCar>();
-            break;
-        }
-        case ECarType::RACE: {
-            car = std::make_shared<CRaceCar>();
-            break;
-        }
-        case ECarType::SUPER: {
-            car = std::make_shared<CSuperCar>();
-            break;
-        }
-        default: {
-            break;
-        }
-    }
-}
-
 std::shared_ptr<CPart> ICarBuilder::addPart(std::shared_ptr<CPart> part) {
     auto &place = parts[part->partType];
     auto oldPart = delPart(part->partType);
@@ -34,7 +14,7 @@ std::shared_ptr<CPart> ICarBuilder::addPart(std::shared_ptr<CPart> part) {
     return oldPart;
 }
 
-std::shared_ptr<CPart> ICarBuilder::delPart(const int partType) {
+std::shared_ptr<CPart> ICarBuilder::delPart(EPartType partType) {
     auto &place = parts[partType];
     if (place) {
         car->delPart(place);
@@ -91,4 +71,16 @@ void CSuperCar::delPart(std::shared_ptr<CPart> &part) {
     if (part->carType == ECarType::RACE) {
         part->modifyAll(1.0 / RACE_PART_ON_SUPER);
     }
+}
+
+void IStreetCarBuilder::create() {
+    car = std::make_shared<CStreetCar>();
+}
+
+void IRaceCarBuilder::create() {
+    car = std::make_shared<CRaceCar>();
+}
+
+void ISuperCarBuilder::create() {
+    car = std::make_shared<CSuperCar>();
 }

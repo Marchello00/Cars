@@ -129,3 +129,30 @@ void CBase::modifyAll(double c) {
     setWeight((int) (getWeight() * c));
     setDamage((int) (getDamage() * c));
 }
+
+template<class T>
+int CBase::summarize() const {
+    int sum = 0;
+    sum += maxSpeed * T::MAX_SPEED;
+    sum += acceleration * T::ACCELERATION;
+    sum += deceleration * T::DECELERATION;
+    sum += weight * T::WEIGHT;
+    sum += lives * T::LIVES;
+    sum += armor * T::ARMOR;
+    sum += ammo * T::AMMO;
+    sum += damage * T::DAMAGE;
+    return sum;
+}
+
+template<class T>
+void CBase::initialize() {
+    setMaxSpeed(T::MAX_SPEED);
+    setAcceleration(T::ACCELERATION);
+    setDeceleration(T::DECELERATION);
+    setArmor(T::ARMOR);
+    setLives(T::LIVES);
+    setAmmo(T::AMMO);
+    setWeight(T::WEIGHT);
+    setDamage(T::DAMAGE);
+    return 0;
+}

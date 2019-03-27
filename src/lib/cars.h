@@ -6,39 +6,55 @@
 #include "enums.h"
 #include "base.h"
 
-class CStreetCar: public CCar {
+class CStreetCar : public CCar {
 public:
     bool addPart(std::shared_ptr<CPart> &part) override;
+
     void delPart(std::shared_ptr<CPart> &part) override;
 
-    CStreetCar(): CCar(ECarType::STREET) { }
+    CStreetCar() : CCar(ECarType::STREET) {}
 };
 
-class CRaceCar: public CCar {
+class CRaceCar : public CCar {
 public:
     bool addPart(std::shared_ptr<CPart> &part) override;
+
     void delPart(std::shared_ptr<CPart> &part) override;
 
-    CRaceCar(): CCar(ECarType::RACE) { }
+    CRaceCar() : CCar(ECarType::RACE) {}
 };
 
-class CSuperCar: public CCar {
+class CSuperCar : public CCar {
 public:
     bool addPart(std::shared_ptr<CPart> &part) override;
+
     void delPart(std::shared_ptr<CPart> &part) override;
 
-    CSuperCar(): CCar(ECarType::SUPER) { }
+    CSuperCar() : CCar(ECarType::SUPER) {}
 };
 
 class ICarBuilder {
-private:
+protected:
     std::shared_ptr<CCar> car;
-    std::map<int, std::shared_ptr<CPart>> parts;
+    std::map<EPartType, std::shared_ptr<CPart>> parts;
 public:
-    void create(int carType);
+    virtual void create() = 0;
 
     std::shared_ptr<CPart> addPart(std::shared_ptr<CPart> part);
-    std::shared_ptr<CPart> delPart(int partType);
+
+    std::shared_ptr<CPart> delPart(EPartType partType);
+};
+
+class IStreetCarBuilder: public ICarBuilder {
+    void create() override;
+};
+
+class IRaceCarBuilder: public ICarBuilder {
+    void create() override;
+};
+
+class ISuperCarBuilder: public ICarBuilder {
+    void create() override;
 };
 
 #endif //CARS_CARS_H

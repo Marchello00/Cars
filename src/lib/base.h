@@ -1,6 +1,8 @@
 #ifndef CARS_BASE_H
 #define CARS_BASE_H
 
+#include "enums.h"
+
 class CBase {
 protected:
     int maxSpeed;
@@ -11,11 +13,16 @@ protected:
     int armor;
     int ammo;
     int damage;
-public:
-public:
 
-    const int carType;
-    explicit CBase(int carType) :
+    template<class T>
+    int summarize() const;
+
+public:
+    template<class T>
+    void initialize();
+
+    const ECarType carType;
+    explicit CBase(ECarType carType) :
             carType(carType), maxSpeed(0),
             acceleration(0), deceleration(0), weight(0),
             lives(0), armor(0), ammo(0), damage(0) {}
@@ -80,9 +87,11 @@ protected:
 
 class CPart : public CBase {
 public:
-    const int partType;
+    const EPartType partType;
 
-    CPart(int carType, int partType) :
+    virtual int getCost() const = 0;
+
+    CPart(ECarType carType, EPartType partType) :
             CBase(carType), partType(partType) {}
 };
 
@@ -92,7 +101,7 @@ public:
 
     virtual void delPart(std::shared_ptr<CPart> &part) = 0;
 
-    explicit CCar(int carType) :
+    explicit CCar(ECarType carType) :
             CBase(carType) {}
 };
 
