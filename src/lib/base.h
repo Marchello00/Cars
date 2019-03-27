@@ -85,24 +85,4 @@ protected:
 
 };
 
-class CPart : public CBase {
-public:
-    const EPartType partType;
-
-    virtual int getCost() const = 0;
-
-    CPart(ECarType carType, EPartType partType) :
-            CBase(carType), partType(partType) {}
-};
-
-class CCar : public CBase {
-public:
-    virtual bool addPart(std::shared_ptr<CPart> &part) = 0;
-
-    virtual void delPart(std::shared_ptr<CPart> &part) = 0;
-
-    explicit CCar(ECarType carType) :
-            CBase(carType) {}
-};
-
 #endif //CARS_BASE_H

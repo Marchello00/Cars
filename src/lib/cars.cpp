@@ -73,14 +73,38 @@ void CSuperCar::delPart(std::shared_ptr<CPart> &part) {
     }
 }
 
-void IStreetCarBuilder::create() {
-    car = std::make_shared<CStreetCar>();
+void IStreetCarBuilder::create(ECarName name) {
+    switch (name) {
+        case ECarName::PEPPER: {
+            car->initialize<EStreetCars::PEPPER>();
+            break;
+        }
+        default: {
+            break;
+        }
+    }
 }
 
-void IRaceCarBuilder::create() {
-    car = std::make_shared<CRaceCar>();
+void IRaceCarBuilder::create(ECarName name) {
+    switch (name) {
+        case ECarName::OVERRUNNER: {
+            car->initialize<typename ERaceCars::OVERRUNNER>();
+            break;
+        }
+        default: {
+            break;
+        }
+    }
 }
 
-void ISuperCarBuilder::create() {
-    car = std::make_shared<CSuperCar>();
+void ISuperCarBuilder::create(ECarName name) {
+    switch (name) {
+        case ECarName::THUNDERBOLT: {
+            car->initialize<typename ESuperCars::THUNDERBOLT>();
+            break;
+        }
+        default: {
+            break;
+        }
+    }
 }

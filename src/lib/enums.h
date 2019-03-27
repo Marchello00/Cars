@@ -5,8 +5,14 @@ enum class ECarType {
     STREET, RACE, SUPER
 };
 
-enum class EPartType: int {
+enum class EPartType {
     ENGINE, WHEELS, BRAKES, TRANSMISSION, BODY, SHIELD, AMMO, GUN
+};
+
+enum class ECarName {
+    PEPPER,         // Street
+    OVERRUNNER,     // Race
+    THUNDERBOLT,    // Super
 };
 
 const double STREET_PART_ON_RACE = 0.6;
@@ -322,5 +328,50 @@ public:
         DAMAGE = 5
     };
 };
+
+//CarsSettings
+
+class EStreetCars {
+public:
+    enum class PEPPER {
+        MAX_SPEED = 80,
+        ACCELERATION = 6,
+        DECELERATION = 4,
+        WEIGHT = 500,
+        LIVES = 10,
+        ARMOR = 0,
+        AMMO = 0,
+        DAMAGE = 0
+    };
+};
+
+class ERaceCars {
+public:
+    enum class OVERRUNNER {
+        MAX_SPEED = 120,
+        ACCELERATION = 8,
+        DECELERATION = 6,
+        WEIGHT = 400,
+        LIVES = 20,
+        ARMOR = 0,
+        AMMO = 0,
+        DAMAGE = 0
+    };
+};
+
+class ESuperCars {
+public:
+    enum class THUNDERBOLT {
+        MAX_SPEED = 200,
+        ACCELERATION = 10,
+        DECELERATION = 8,
+        WEIGHT = 350,
+        LIVES = 30,
+        ARMOR = 0,
+        AMMO = 0,
+        DAMAGE = 0
+    };
+};
+
 
 #endif //CARS_ENUMS_H

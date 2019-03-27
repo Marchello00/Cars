@@ -5,6 +5,17 @@
 #include "enums.h"
 #include "base.h"
 
+class CPart : public CBase {
+public:
+    const EPartType partType;
+
+    virtual int getCost() const = 0;
+
+    CPart(ECarType carType, EPartType partType) :
+            CBase(carType), partType(partType) {}
+};
+
+
 class CStreetPart: public CPart {
 public:
     int getCost() const override;
