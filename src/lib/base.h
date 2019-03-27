@@ -3,53 +3,97 @@
 
 class CBase {
 protected:
-    int max_speed;
+    int maxSpeed;
     int acceleration;
+    int deceleration;
     int weight;
     int lives;
     int armor;
     int ammo;
+    int damage;
 public:
-    const int car_type;
+public:
 
-    CBase(int car_type) :
-            car_type(car_type), max_speed(0),
-            weight(0), lives(0), armor(0),
-            ammo(0) {}
+    const int carType;
+    explicit CBase(int carType) :
+            carType(carType), maxSpeed(0),
+            acceleration(0), deceleration(0), weight(0),
+            lives(0), armor(0), ammo(0), damage(0) {}
 
-    void set_max_speed(int val) {
-        max_speed = val;
-    }
+    void setMaxSpeed(int maxSpeed);
 
-    void set_acceleration(int val) {
-        acceleration = val;
-    }
+    void setAcceleration(int acceleration);
 
-    void set_weight(int val) {
-        weight = val;
-    }
+    void setDeceleration(int deceleration);
 
-    void set_lives(int val) {
-        lives = val;
-    }
+    void setWeight(int weight);
 
-    void set_armor(int val) {
-        armor = val;
-    }
+    void setLives(int lives);
 
-    void set_ammo(int val) {
-        armor = val;
-    }
+    void setArmor(int armor);
+
+    void setAmmo(int ammo);
+
+    void setDamage(int damage);
+
+    void addMaxSpeed(int maxSpeed);
+
+    void addAcceleration(int acceleration);
+
+    void addDeceleration(int deceleration);
+
+    void addWeight(int weight);
+
+    void addLives(int lives);
+
+    void addArmor(int armor);
+
+    void addAmmo(int ammo);
+
+    void addDamage(int damage);
+
+    int getMaxSpeed() const;
+
+    int getAcceleration() const;
+
+    int getDeceleration() const;
+
+    int getWeight() const;
+
+    int getLives() const;
+
+    int getArmor() const;
+
+    int getAmmo() const;
+
+    int getDamage() const;
+
+    void modifyAll(double c);
+
+protected:
+
+    void addBase(std::shared_ptr<CBase> b);
+
+    void delBase(std::shared_ptr<CBase> b);
+
 };
 
-class CPart : CBase {
+class CPart : public CBase {
 public:
-    const int part_type;
-    virtual void get_cost() = 0;
+    const int partType;
+
+    CPart(int carType, int partType) :
+            CBase(carType), partType(partType) {}
 };
 
-class CCar : CBase {
+class CCar : public CBase {
+public:
+    virtual bool addPart(std::shared_ptr<CPart> &part) = 0;
 
+    virtual void delPart(std::shared_ptr<CPart> &part) = 0;
+
+    explicit CCar(int carType) :
+            CBase(carType) {}
 };
 
 #endif //CARS_BASE_H

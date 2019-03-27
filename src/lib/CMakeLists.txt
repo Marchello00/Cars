@@ -2,8 +2,18 @@ cmake_minimum_required(VERSION 3.13)
 
 set(CMAKE_CXX_STANDARD 17)
 
-project(libs)
+set(BASE_SOURCE_LIB base.cpp)
 
-set(SOURCE_LIB base.cpp)
+add_library(base STATIC ${BASE_SOURCE_LIB})
 
-add_library(base STATIC ${SOURCE_LIB})
+set(CARS_SOURCE_LIB cars.cpp)
+
+add_library(cars STATIC ${CARS_SOURCE_LIB})
+
+set(PARTS_SOURCE_LIB parts.cpp)
+
+add_library(parts STATIC ${PARTS_SOURCE_LIB})
+
+set(CONTAINER_SOURCE_LIB container.cpp)
+
+add_library(container STATIC ${CONTAINER_SOURCE_LIB})
