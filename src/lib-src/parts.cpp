@@ -1,5 +1,5 @@
 #ifndef PARTS_ADDED
-#include "parts.h"
+#include "../lib/parts.h"
 #endif
 
 int CStreetPart::getCost() const {

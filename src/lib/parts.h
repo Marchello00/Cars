@@ -78,6 +78,6 @@ public:
 };
 
 #define PARTS_ADDED
-#include "parts.cpp"
+#include "../lib-src/parts.cpp"
 
 #endif //CARS_PARTS_H

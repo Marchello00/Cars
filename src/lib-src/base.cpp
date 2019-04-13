@@ -1,5 +1,5 @@
 #include <memory>
-#include "base.h"
+#include "../lib/base.h"
 
 void CBase::setMaxSpeed(int maxSpeed) {
     CBase::maxSpeed = maxSpeed;

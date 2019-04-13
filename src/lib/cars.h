@@ -85,6 +85,6 @@ public:
 
 #define CARS_ADDED
 
-#include "cars.cpp"
+#include "../lib-src/cars.cpp"
 
 #endif //CARS_CARS_H
