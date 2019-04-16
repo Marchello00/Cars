@@ -17,3 +17,11 @@ add_library(parts STATIC ${PARTS_SOURCE_LIB})
 set(CONTAINER_SOURCE_LIB ../lib-src/container.cpp)
 
 add_library(container STATIC ${CONTAINER_SOURCE_LIB})
+
+set(BONUS_SOURCE_LIB ../lib-src/bonus.cpp)
+
+add_library(bonus STATIC ${BONUS_SOURCE_LIB})
+
+set(GROUND_SOURCE_LIB ../lib-src/ground.cpp)
+
+add_library(ground STATIC ${GROUND_SOURCE_LIB})

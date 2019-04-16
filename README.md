@@ -12,3 +12,8 @@
 ICarBuilder, который улучшает машину добавляя к ней разные детали(и в свою очередь тоже является фабрикой).
 
 P.S.: container.h и container.cpp не надо смотреть, они пока не нужны
+
+
+
+TODO: Observer : Enemy->Player
+TODO: Adapter  : tinyxml->Level

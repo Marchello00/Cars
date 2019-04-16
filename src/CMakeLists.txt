@@ -4,9 +4,11 @@ set(CMAKE_CXX_STANDARD 17)
 
 include_directories(lib)
 include_directories(grafic-lib)
+include_directories(tinyxml2)
 
 add_subdirectory(lib)
 add_subdirectory(grafic-lib)
+add_subdirectory(tinyxml2)
 
 add_executable(Cars main.cpp)
 
@@ -18,3 +20,4 @@ endif ()
 set(GRAPHICAL_LIBS gracer)
 
 target_link_libraries(Cars ${GRAPHICAL_LIBS})
+target_link_libraries(Cars tinyxml2)

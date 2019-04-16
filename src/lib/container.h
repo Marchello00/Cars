@@ -4,13 +4,19 @@
 #include <vector>
 #include "cars.h"
 #include "parts.h"
+#include "base.h"
 
-class CarHolder {
+class CHolder {
+private:
+    std::vector<CBase *>
+};
+
+class CCarHolder {
 private:
     std::vector<CCar *> cars;
 };
 
-class PartHolder {
+class CPartHolder {
 private:
     std::vector<CPart *> parts;
 };
