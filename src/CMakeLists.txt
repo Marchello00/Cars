@@ -8,6 +8,7 @@ include_directories(tinyxml2)
 
 add_subdirectory(lib)
 add_subdirectory(grafic-lib)
+add_subdirectory(tiled-map-loader)
 add_subdirectory(tinyxml2)
 
 add_executable(Cars main.cpp)
@@ -21,3 +22,4 @@ set(GRAPHICAL_LIBS gracer)
 
 target_link_libraries(Cars ${GRAPHICAL_LIBS})
 target_link_libraries(Cars tinyxml2)
+target_link_libraries(Cars tiledmap)
