@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="12">
  <tileset firstgid="1" source="tiles.tsx"/>
+ <tileset firstgid="313" name="RaceRoad" tilewidth="32" tileheight="32" spacing="2" tilecount="7200" columns="120">
+  <image source="../DEV/racing-pack/Spritesheets/spritesheet_tiles.png" width="4096" height="2048"/>
+ </tileset>
+ <tileset firstgid="7513" name="RaceRoad" tilewidth="128" tileheight="128" spacing="2" tilecount="465" columns="31">
+  <image source="../DEV/racing-pack/Spritesheets/spritesheet_tiles.png" width="4096" height="2048"/>
+ </tileset>
  <layer id="1" name="Tile Layer 1" width="40" height="40">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
