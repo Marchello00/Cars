@@ -196,9 +196,6 @@ bool TmxLevel::LoadFromFile(const std::string &filepath) {
                 convert(tileGID, fh, fv, fd);
                 const int subRectToUse = tileGID - m_firstTileID;
 
-                int left = x * m_tileWidth;
-                int top = y * m_tileHeight;
-
                 RotatorAdapter ra;
                 if (fd) ra.flipDiagonally();
                 if (fh) ra.flipHorizontally();
@@ -209,7 +206,10 @@ bool TmxLevel::LoadFromFile(const std::string &filepath) {
                 sprite.setTextureRect(subRects[subRectToUse]);
                 sprite.setPosition(static_cast<float>(x * m_tileWidth), static_cast<float>(y * m_tileHeight));
                 sprite.setColor(sf::Color(255, 255, 255, layer.opacity));
+                sprite.setOrigin(m_tileWidth / 2.0, m_tileHeight / 2.0);
                 sprite.setRotation(ra.getAngle());
+                sprite.move(m_tileWidth / 2.0, m_tileHeight / 2.0);
+//                sprite.setOrigin(-m_tileWidth / 2.0, -m_tileHeight / 2.0);
 
                 layer.tiles.push_back(sprite);
             }
@@ -397,7 +397,7 @@ void RotatorAdapter::flipDiagonally() {
 }
 
 float RotatorAdapter::getAngle() {
-    int sinx = matrix[0][1];
+    int sinx = matrix[1][0];
     int cosx = matrix[0][0];
     return (sinx ? (sinx == 1 ? 90 : 270) : (cosx == 1 ? 0 : 180));
 }
