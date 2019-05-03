@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map SYSTEM "http://mapeditor.org/dtd/1.0/map.dtd">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="8" height="8" tilewidth="128" tileheight="128" infinite="0" nextlayerid="4" nextobjectid="16">
+ <tileset firstgid="1" name="Road" tilewidth="128" tileheight="128" spacing="2" tilecount="465" columns="31">
+  <image source="../DEV/racing-pack/Spritesheets/spritesheet_tiles.png" width="4096" height="2048"/>
+ </tileset>
+ <layer id="1" name="Tile Layer 1" width="8" height="8">
+  <data encoding="csv">
+2684354672,1610612902,1610612902,3221225584,326,1610613155,1610612902,3221225584,
+166,0,0,166,0,166,0,166,
+166,0,0,166,0,166,0,166,
+19,0,0,2684354610,1610612902,50,0,166,
+264,0,0,0,0,0,0,166,
+3221225891,1610612902,1610612902,1610612902,1610612902,1610612902,1610612902,419,
+1610612987,63,63,63,63,63,63,2684354811,
+2684354665,1610613147,1610613147,1610613147,1610613147,1610613147,1610613147,105
+</data>
+ </layer>
+ <objectgroup id="3" name="Ground">
+  <object id="3" name="Wall" type="wall" x="109.301" y="117.55" width="16.4982" height="525.882"/>
+  <object id="4" name="Wall" type="wall" x="117.55" y="105.176" width="268.097" height="20.6228"/>
+  <object id="6" name="Wall" type="wall" x="379.46" y="111.363" width="20.6228" height="305.218"/>
+  <object id="7" name="Wall" type="wall" x="478.449" y="488.761" width="193.854" height="22.6851"/>
+  <object id="8" name="Wall" type="wall" x="746.546" y="119.612" width="20.6228" height="301.093"/>
+  <object id="9" name="Wall" type="wall" x="494.947" y="379.46" width="154.671" height="20.6228"/>
+  <object id="10" name="Wall" type="wall" x="490.823" y="101.052" width="20.6228" height="278.408"/>
+  <object id="11" name="Wall" type="wall" x="637.245" y="117.55" width="20.6228" height="257.785"/>
+  <object id="12" name="Wall" type="wall" x="111.363" y="637.245" width="798.103" height="22.6851"/>
+  <object id="14" name="Wall" type="wall" x="756.857" y="107.239" width="146.422" height="18.5605"/>
+  <object id="15" name="Wall" type="wall" x="890.905" y="111.363" width="22.6851" height="534.131"/>
+ </objectgroup>
+ <objectgroup id="2" name="Cars">
+  <object id="1" name="Player" type="car" x="41.2456" y="538.255" width="41.2456" height="74.2421"/>
+ </objectgroup>
+</map>

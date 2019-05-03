@@ -5,11 +5,12 @@ set(CMAKE_CXX_STANDARD 17)
 include_directories(lib)
 include_directories(grafic-lib)
 include_directories(tinyxml2)
+include_directories(helpers-lib)
 
 add_subdirectory(lib)
 add_subdirectory(grafic-lib)
-add_subdirectory(tiled-map-loader)
 add_subdirectory(tinyxml2)
+add_subdirectory(helpers-lib)
 
 add_executable(Cars main.cpp)
 
