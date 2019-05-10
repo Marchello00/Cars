@@ -41,8 +41,8 @@ fetch_googletest(
 
 enable_testing()
 
-add_executable(TestBuilder construct_test.cpp)
+add_executable(unit_test construct_test.cpp)
 
-target_link_libraries(TestBuilder gtest_main base)
+target_link_libraries(unit_test gtest_main base)
 
 include_directories(../src/lib)

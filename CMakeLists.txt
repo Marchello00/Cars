@@ -9,5 +9,7 @@ find_package(SFML REQUIRED system window graphics network audio)
 include_directories(.)
 
 add_subdirectory(src)
+
+enable_testing()
 add_subdirectory(test)
 
