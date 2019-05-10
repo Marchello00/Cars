@@ -24,6 +24,6 @@ script:
 
 notifications:
   webhooks:
-    - https://fathomless-fjord-24024.herokuapp.com/notify?secret=SuperEncryptedSecret
+    - https://fathomless-fjord-24024.herokuapp.com/notify?secret=KekLolCheburek
   email:
     - nagov-mark@mail.ru
