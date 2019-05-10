@@ -1,6 +1,8 @@
 #ifndef CARS_ENUMS_H
 #define CARS_ENUMS_H
 
+#pragma once
+
 enum class ECarType {
     STREET, RACE, SUPER
 };

@@ -1,6 +1,8 @@
 #ifndef CARS_GRACER_H
 #define CARS_GRACER_H
 
+#pragma once
+
 #include <SFML/Graphics.hpp>
 #include "genums.h"
 

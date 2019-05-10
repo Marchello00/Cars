@@ -1,3 +1,6 @@
+#ifndef CARS_TMXLEVEL_H
+#define CARS_TMXLEVEL_H
+
 #pragma once
 
 #include <string>
@@ -109,3 +112,5 @@ private:
     int horizontal[2][2] = {{1, 0},
                             {0, -1}};
 };
+
+#endif // CARS_TMXLEVEL_H

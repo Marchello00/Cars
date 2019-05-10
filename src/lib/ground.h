@@ -1,9 +1,7 @@
-//
-// Created by Марк Наговицин on 2019-04-16.
-//
-
 #ifndef CARS_GROUND_H
 #define CARS_GROUND_H
+
+#pragma once
 
 #include <memory>
 

@@ -1,6 +1,8 @@
 #ifndef CARS_CONTAINER_H
 #define CARS_CONTAINER_H
 
+#pragma once
+
 #include <vector>
 #include "cars.h"
 #include "parts.h"

@@ -1,6 +1,8 @@
 #ifndef CARS_BONUS_H
 #define CARS_BONUS_H
 
+#pragma once
+
 #include "base.h"
 #include "enums.h"
 
