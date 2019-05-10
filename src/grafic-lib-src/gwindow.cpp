@@ -73,3 +73,7 @@ sf::Vector2u Window::getWindowSize() {
 void Window::draw(sf::Drawable &l_drawable) {
     m_window.draw(l_drawable);
 }
+
+void Window::draTmxLevel(TmxLevel &level) {
+    level.draw(m_window);
+}

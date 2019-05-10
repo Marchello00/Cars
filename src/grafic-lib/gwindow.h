@@ -2,6 +2,7 @@
 #define CARS_GWINDOW_H
 
 #include <SFML/Graphics.hpp>
+#include "TmxLevel.h"
 
 class Window {
 public:
@@ -24,6 +25,8 @@ public:
     void toggleFullscreen();
 
     void draw(sf::Drawable &l_drawable);
+
+    void draTmxLevel(TmxLevel &level);
 
 private:
     void setup(const std::string &l_title,
