@@ -12,7 +12,6 @@ script:
   - cd build
   - cmake ..
   - cmake --build .
-  - cd ..
   - ctest
 
 notifications:

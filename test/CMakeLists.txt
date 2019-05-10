@@ -49,5 +49,5 @@ add_test(
         NAME
         builder
         COMMAND
-        bin/builder_test
+        builder_test
 )
