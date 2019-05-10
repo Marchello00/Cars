@@ -1,20 +1,10 @@
 language: cpp
 
 os:
-#  - linux
   - osx
 
 compiler:
-#  - gcc
   - clang
-
-#matrix:
-#  exclude:
-#    - os: osx
-#      compiler: gcc
-
-#install:
-#  - ./travis_ci/install-$TRAVIS_OS_NAME.sh
 
 script:
   - brew install sfml
@@ -22,6 +12,7 @@ script:
   - cd build
   - cmake ..
   - cmake --build .
+  - cd ..
   - ctest
 
 notifications:

@@ -8,6 +8,7 @@ public:
 
     void handleInput();
     void update();
+    void render();
 };
 
 #endif //CARS_GGAME_H
