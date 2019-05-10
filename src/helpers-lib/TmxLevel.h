@@ -14,15 +14,15 @@
 // Текстурные координаты позволяют связать с объектом спрайт,
 //  использующий основную текстуру карты как источник данных.
 struct TmxObject {
-    int GetPropertyInt(const std::string &propertyName);
+    int getPropertyInt(const std::string &propertyName);
 
-    float GetPropertyFloat(const std::string &propertyName);
+    float getPropertyFloat(const std::string &propertyName);
 
-    std::string GetPropertyString(const std::string &propertyName);
+    std::string getPropertyString(const std::string &propertyName);
 
-    void MoveBy(const sf::Vector2f &movement);
+    void moveBy(const sf::Vector2f &movement);
 
-    void MoveTo(const sf::Vector2f &position);
+    void moveTo(const sf::Vector2f &position);
 
     std::string name;
     std::string type;
@@ -44,24 +44,24 @@ struct TmxLayer {
 class TmxLevel {
 public:
     // Загружает данные из TMX в память объекта.
-    bool LoadFromFile(const std::string &filepath);
+    bool loadFromFile(const std::string &filepath);
 
-    TmxObject GetFirstObject(const std::string &name) const;
+    TmxObject getFirstObject(const std::string &name) const;
 
-    std::vector<TmxObject> GetAllObjects(const std::string &name) const;
+    std::vector<TmxObject> getAllObjects(const std::string &name) const;
 
-    sf::Vector2i GetTileSize() const;
+    sf::Vector2i getTileSize() const;
 
-    float GetTilemapWidth() const;
+    float getTilemapWidth() const;
 
-    float GetTilemapHeight() const;
+    float getTilemapHeight() const;
 
-    sf::Vector2f GetTilemapSize() const;
+    sf::Vector2f getTilemapSize() const;
 
     // Рисует все слои тайлов один за другим,
     //  но не рисует объекты (рисованием которых должна заниматься игра).
     // Принимает любую цель для рисования, например, sf::RenderWindow.
-    void Draw(sf::RenderTarget &target) const;
+    void draw(sf::RenderTarget &target) const;
 
 private:
     int m_width = 0;

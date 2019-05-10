@@ -14,7 +14,7 @@ int main() {
     GRacer racer(racerImage, 100, 100);
 
     TmxLevel level;
-    level.LoadFromFile("maps/map2.tmx");
+    level.loadFromFile("maps/map2.tmx");
     while (window.isOpen()) {
 
         time = clock.getElapsedTime().asMilliseconds();
@@ -30,7 +30,7 @@ int main() {
 
         window.clear();
 
-        level.Draw(window);
+        level.draw(window);
         racer.draw(window);
 
         window.display();

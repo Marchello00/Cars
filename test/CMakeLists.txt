@@ -41,7 +41,7 @@ fetch_googletest(
 
 add_executable(builder_test construct_test.cpp)
 
-target_link_libraries(builder_test gtest_main base)
+target_link_libraries(builder_test gtest_main base cars parts)
 
 include_directories(../src/lib)
 
@@ -49,5 +49,5 @@ add_test(
         NAME
         builder
         COMMAND
-        builder_tests
+        bin/builder_tests
 )

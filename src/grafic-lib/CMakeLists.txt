@@ -10,13 +10,18 @@ set(GRACER_SOURCE_LIB ../grafic-lib-src/gracer.cpp)
 
 add_library(gracer STATIC ${GRACER_SOURCE_LIB})
 
-set(GCOMMON_SOURCE_LIB ../grafic-lib-src/gcommon.cpp)
+set(GWINDOW_SOURCE_LIB ../grafic-lib-src/gwindow.cpp)
 
-add_library(gcommon STATIC ${GCOMMON_SOURCE_LIB})
+add_library(gwindow STATIC ${GWINDOW_SOURCE_LIB})
+
+set(GGAME_SOURCE_LIB ../grafic-lib-src/ggame.cpp)
+
+add_library(ggame STATIC ${GGAME_SOURCE_LIB})
 
 if (SFML_FOUND)
     include_directories(${SFML_INCLUDE_DIR})
     target_link_libraries(gracer ${SFML_LIBRARIES})
     target_link_libraries(glevel ${SFML_LIBRARIES})
-    target_link_libraries(gcommon ${SFML_LIBRARIES})
+    target_link_libraries(gwindow ${SFML_LIBRARIES})
+    target_link_libraries(ggame ${SFML_LIBRARIES})
 endif ()

@@ -1,75 +1,75 @@
-#include "gcommon.h"
+#include "gwindow.h"
 
 Window::Window() : m_isFullscreen(false), m_isDone(false) {
-    Setup("Window", sf::Vector2u(640, 480));
+    setup("Window", sf::Vector2u(640, 480));
 }
 
 Window::Window(const std::string &l_title, const sf::Vector2u &l_size) :
         m_isFullscreen(false), m_isDone(false) {
-    Setup(l_title, l_size);
+    setup(l_title, l_size);
 }
 
 Window::~Window() {
-    Destroy();
+    destroy();
 }
 
-void Window::Setup(const std::string &l_title, const sf::Vector2u &l_size) {
+void Window::setup(const std::string &l_title, const sf::Vector2u &l_size) {
     m_windowTitle = l_title;
     m_windowSize = l_size;
     m_isFullscreen = false;
     m_isDone = false;
-    Create();
+    create();
 }
 
-void Window::Create() {
+void Window::create() {
     auto style = (m_isFullscreen ? sf::Style::Fullscreen
                                  : sf::Style::Default);
     m_window.create({m_windowSize.x, m_windowSize.y, 32},
                     m_windowTitle, style);
 }
 
-void Window::Destroy() {
+void Window::destroy() {
     m_window.close();
 }
 
-void Window::Update() {
+void Window::update() {
     sf::Event event{};
     while (m_window.pollEvent(event)) {
         if (event.type == sf::Event::Closed) {
             m_isDone = true;
         } else if (event.type == sf::Event::KeyPressed &&
                    event.key.code == sf::Keyboard::F5) {
-            ToggleFullscreen();
+            toggleFullscreen();
         }
     }
 }
 
-void Window::ToggleFullscreen() {
+void Window::toggleFullscreen() {
     m_isFullscreen = !m_isFullscreen;
-    Destroy();
-    Create();
+    destroy();
+    create();
 }
 
-bool Window::IsFullscreen() {
+bool Window::isFullscreen() {
     return m_isFullscreen;
 }
 
-bool Window::IsDone() {
+bool Window::isDone() {
     return m_isDone;
 }
 
-void Window::BeginDraw() {
+void Window::beginDraw() {
     m_window.clear(sf::Color::Black);
 }
 
-void Window::EndDraw() {
+void Window::endDraw() {
     m_window.display();
 }
 
-sf::Vector2u Window::GetWindowSize() {
+sf::Vector2u Window::getWindowSize() {
     return m_windowSize;
 }
 
-void Window::Draw(sf::Drawable &l_drawable) {
+void Window::draw(sf::Drawable &l_drawable) {
     m_window.draw(l_drawable);
 }

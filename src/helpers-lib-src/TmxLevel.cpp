@@ -69,31 +69,31 @@ float ParseFloat(const std::string &str) {
     return value;
 }
 
-int TmxObject::GetPropertyInt(const std::string &propertyName) {
+int TmxObject::getPropertyInt(const std::string &propertyName) {
     return std::stoi(properties[propertyName].c_str());
 }
 
-float TmxObject::GetPropertyFloat(const std::string &propertyName) {
+float TmxObject::getPropertyFloat(const std::string &propertyName) {
     return ParseFloat(properties[propertyName].c_str());
 }
 
-std::string TmxObject::GetPropertyString(const std::string &propertyName) {
+std::string TmxObject::getPropertyString(const std::string &propertyName) {
     return properties[propertyName];
 }
 
-void TmxObject::MoveBy(const sf::Vector2f &movement) {
+void TmxObject::moveBy(const sf::Vector2f &movement) {
     rect.left += movement.x;
     rect.top += movement.y;
     sprite.move(movement);
 }
 
-void TmxObject::MoveTo(const sf::Vector2f &position) {
+void TmxObject::moveTo(const sf::Vector2f &position) {
     rect.left = position.x;
     rect.top = position.y;
     sprite.setPosition(position);
 }
 
-bool TmxLevel::LoadFromFile(const std::string &filepath) {
+bool TmxLevel::loadFromFile(const std::string &filepath) {
     XMLDocument levelFile;
 
     // Load XML into in-memory XMLDocument.
@@ -307,7 +307,7 @@ bool TmxLevel::LoadFromFile(const std::string &filepath) {
     return true;
 }
 
-TmxObject TmxLevel::GetFirstObject(const std::string &name) const {
+TmxObject TmxLevel::getFirstObject(const std::string &name) const {
     // Only first object with given name
     for (size_t i = 0; i < m_objects.size(); i++)
         if (m_objects[i].name == name)
@@ -315,7 +315,7 @@ TmxObject TmxLevel::GetFirstObject(const std::string &name) const {
     throw std::runtime_error("Object with name " + name + " was not found");
 }
 
-std::vector<TmxObject> TmxLevel::GetAllObjects(const std::string &name) const {
+std::vector<TmxObject> TmxLevel::getAllObjects(const std::string &name) const {
     // All objects with given name
     std::vector<TmxObject> vec;
     for (size_t i = 0; i < m_objects.size(); i++) {
@@ -327,26 +327,26 @@ std::vector<TmxObject> TmxLevel::GetAllObjects(const std::string &name) const {
     return vec;
 }
 
-sf::Vector2i TmxLevel::GetTileSize() const {
+sf::Vector2i TmxLevel::getTileSize() const {
     return sf::Vector2i(m_tileWidth, m_tileHeight);
 }
 
-float TmxLevel::GetTilemapWidth() const {
+float TmxLevel::getTilemapWidth() const {
     return static_cast<float>(m_tileWidth * m_width);
 }
 
-float TmxLevel::GetTilemapHeight() const {
+float TmxLevel::getTilemapHeight() const {
     return static_cast<float>(m_tileHeight * m_height);
 }
 
-sf::Vector2f TmxLevel::GetTilemapSize() const {
-    return sf::Vector2f(GetTilemapWidth(), GetTilemapHeight());
+sf::Vector2f TmxLevel::getTilemapSize() const {
+    return sf::Vector2f(getTilemapWidth(), getTilemapHeight());
 }
 
-void TmxLevel::Draw(sf::RenderTarget &target) const {
+void TmxLevel::draw(sf::RenderTarget &target) const {
     const sf::FloatRect viewportRect = target.getView().getViewport();
 
-    // Draw all tiles (and don't draw objects)
+    // draw all tiles (and don't draw objects)
     for (const auto &layer : m_layers) {
         for (const auto &tile : layer.tiles) {
             if (viewportRect.intersects(tile.getLocalBounds())) {
