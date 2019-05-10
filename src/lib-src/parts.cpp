@@ -1,6 +1,7 @@
 #ifndef PARTS_ADDED
+#define PARTS_ADDED
+
 #include "../lib/parts.h"
-#endif
 
 int CStreetPart::getCost() const {
     return summarize<EStreetPartCost>();
@@ -79,3 +80,5 @@ std::shared_ptr<CPart> CRacePartsFactory::create(EPartType partType) const {
 std::shared_ptr<CPart> CSuperPartsFactory::create(EPartType partType) const {
     return choice_create<ESuperParts>(partType);
 }
+
+#endif // PARTS_ADDED

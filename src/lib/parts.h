@@ -79,7 +79,6 @@ public:
     ~CSuperPartsFactory() override = default;
 };
 
-#define PARTS_ADDED
 #include "../lib-src/parts.cpp"
 
 #endif //CARS_PARTS_H

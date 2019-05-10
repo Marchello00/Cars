@@ -85,8 +85,6 @@ public:
     ~ISuperCarBuilder() override = default;
 };
 
-#define CARS_ADDED
-
 #include "../lib-src/cars.cpp"
 
 #endif //CARS_CARS_H

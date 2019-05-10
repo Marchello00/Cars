@@ -1,7 +1,3 @@
-//
-// Created by Марк Наговицин on 2019-04-16.
-//
-
 #include "ground.h"
 
 double CBaseGround::getSlow() const {

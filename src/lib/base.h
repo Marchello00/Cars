@@ -4,6 +4,7 @@
 #pragma once
 
 #include "enums.h"
+#include <memory>
 
 class CBase {
 protected:
