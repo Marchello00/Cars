@@ -1,22 +1,23 @@
 language: cpp
 
 os:
-  - linux
+#  - linux
   - osx
 
 compiler:
-  - gcc
+#  - gcc
   - clang
 
-matrix:
-  exclude:
-    - os: osx
-      compiler: gcc
+#matrix:
+#  exclude:
+#    - os: osx
+#      compiler: gcc
 
-install:
-  - ./travis_ci/install-$TRAVIS_OS_NAME.sh
+#install:
+#  - ./travis_ci/install-$TRAVIS_OS_NAME.sh
 
 script:
+  - brew install sfml
   - mkdir build
   - cd build
   - cmake ..
