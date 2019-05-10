@@ -18,19 +18,19 @@ if (APPLE)
     add_definitions(-D__GLIBCXX__)
 endif (APPLE)
 
-if(MINGW)
+if (MINGW)
     set(GTEST_DISABLE_PTHREADS ON)
-endif()
+endif ()
 
-if(WIN32)
+if (WIN32)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++0x")
     set(WINDOWS_CMAKE_ARGS
             -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG:PATH=DebugLibs
             -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE:PATH=ReleaseLibs
             )
-else(WIN32)
-    set(WINDOWS_CMAKE_ARGS )
-endif(WIN32)
+else (WIN32)
+    set(WINDOWS_CMAKE_ARGS)
+endif (WIN32)
 
 
 include(cmake/googletest.cmake)
@@ -39,10 +39,15 @@ fetch_googletest(
         ${PROJECT_BINARY_DIR}/googletest
 )
 
-enable_testing()
+add_executable(builder_test construct_test.cpp)
 
-add_executable(unit_test construct_test.cpp)
-
-target_link_libraries(unit_test gtest_main base)
+target_link_libraries(builder_test gtest_main base)
 
 include_directories(../src/lib)
+
+add_test(
+        NAME
+        builder
+        COMMAND
+        builder_tests
+)
