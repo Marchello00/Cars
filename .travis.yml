@@ -13,6 +13,9 @@ matrix:
     - os: osx
       compiler: gcc
 
+install:
+  - source travis_ci/install-$TRAVIS_OS_NAME.sh
+
 script:
   - mkdir build
   - cd build
