@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map SYSTEM "http://mapeditor.org/dtd/1.0/map.dtd">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="6" height="6" tilewidth="128" tileheight="128" infinite="0" nextlayerid="2" nextobjectid="1">
+ <tileset firstgid="1" name="road" tilewidth="128" tileheight="128" spacing="2" tilecount="465" columns="31">
+  <image source="../images/racing-pack/Spritesheets/spritesheet_tiles.png" width="4096" height="2048"/>
+ </tileset>
+ <layer id="1" name="Tile Layer 1" width="6" height="6">
+  <data encoding="csv">
+2684354672,1610612902,1610613155,1610613155,1610612902,3221225584,
+166,207,3221225860,3221225860,2684354767,166,
+166,1610613005,175,175,2684354829,166,
+166,1610613005,175,175,2684354829,166,
+166,1610612943,388,388,3221225679,166,
+112,1610612902,2684354979,2684354979,1610612902,1610612848
+</data>
+ </layer>
+</map>

@@ -26,7 +26,7 @@ public:
 
     void draw(sf::Drawable &l_drawable);
 
-    void draTmxLevel(TmxLevel &level);
+    void draw(TmxLevel &level);
 
 private:
     void setup(const std::string &l_title,

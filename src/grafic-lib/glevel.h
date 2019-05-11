@@ -3,8 +3,8 @@
 
 #pragma once
 
-class Field {
+#include "TmxLevel.h"
 
-};
+typedef TmxLevel Level;
 
 #endif //CARS_GLEVEL_H
