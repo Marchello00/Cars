@@ -5,6 +5,7 @@
 
 #include "gwindow.h"
 #include "glevel.h"
+#include "gracer.h"
 
 class Game {
 public:
@@ -20,10 +21,18 @@ public:
 
     Window *getWindow();
 
+    sf::Time getElapsed();
+
+    void restartClock();
+
 private:
     Window m_window;
 
     Level m_level;
+    Racer m_player;
+
+    sf::Clock m_clock;
+    sf::Time m_elapsed;
 };
 
 #endif //CARS_GGAME_H

@@ -35,7 +35,9 @@ void Window::destroy() {
 void Window::update() {
     sf::Event event{};
     while (m_window.pollEvent(event)) {
-        if (event.type == sf::Event::Closed) {
+        if (event.type == sf::Event::Closed ||
+            (event.type == sf::Event::KeyPressed &&
+             event.key.code == sf::Keyboard::Escape)) {
             m_isDone = true;
         } else if (event.type == sf::Event::KeyPressed &&
                    event.key.code == sf::Keyboard::F5) {
@@ -74,6 +76,6 @@ void Window::draw(sf::Drawable &l_drawable) {
     m_window.draw(l_drawable);
 }
 
-void Window::draw(TmxLevel &level) {
-    level.draw(m_window);
+sf::RenderWindow *Window::getRenderWindow() {
+    return &m_window;
 }

@@ -5,31 +5,57 @@
 
 #include <SFML/Graphics.hpp>
 #include "genums.h"
+#include "ground.h"
+#include "cars.h"
 
-class GRacer {
+class Racer {
+public:
+
+    Racer();
+
+    void setPosition(sf::Vector2f newPosition);
+
+    void setRotation(double alpha);
+
+    void setImage(const std::string &path);
+
+    void update(float tm, const CBaseGround &ground);
+
+    void render(sf::RenderWindow &window);
+
+    void setCar(std::shared_ptr<CCar> new_car);
+
+    void setSpeedE(float newSpeedE);
+
+    void leftTurn();
+
+    void rightTurn();
+
+    void moveForward();
+
+    void moveBackward();
+
 private:
-    double x, y;
-    double speed;
-    double w = CAR_WIDTH, h = CAR_HEIGHT;
+
+    sf::Vector2f position;
+
+    sf::Vector2f speed;
+    double speedE = DEFAULT_SPEED_E; // convert constants from enums to real speed
+    float angle;
+    float acceleration;
+
+    int w = CAR_WIDTH, h = CAR_HEIGHT;
     sf::Texture texture;
+
     sf::Sprite sprite;
 
-public:
-    GRacer(sf::Image &image, double x, double y) :
-            x(x), y(y), speed(0) {
-        texture.loadFromImage(image);
-        sprite.setTexture(texture);
-        sprite.setOrigin(w / 2, h / 2);
-        sprite.setScale(w / image.getSize().x, h / image.getSize().y);
-    }
+    std::shared_ptr<CCar> car;
 
-    void update(double time) {
-        sprite.setPosition(x + w / 2, y + h / 2);
-    }
+    void changeSpeed(float tm, const CBaseGround &ground);
 
-    void draw(sf::RenderWindow &window) {
-        window.draw(sprite);
-    }
+    double getAcceleration(const CBaseGround &ground);
+
+    bool isMoving();
 };
 
 #endif //CARS_GRACER_H

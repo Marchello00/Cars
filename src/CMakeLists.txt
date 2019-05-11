@@ -19,8 +19,23 @@ if (SFML_FOUND)
     target_link_libraries(Cars ${SFML_LIBRARIES})
 endif ()
 
-set(GRAPHICAL_LIBS gracer ggame glevel gwindow)
+set(GRAPHICAL_LIBS gracer ggame glevel gwindow genums)
 
 target_link_libraries(Cars ${GRAPHICAL_LIBS})
 target_link_libraries(Cars tinyxml2)
 target_link_libraries(Cars tiledmap)
+
+if (NOT CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_CURRENT_BINARY_DIR)
+
+    set(data_SHADOW maps images)
+
+    foreach(item IN LISTS data_SHADOW)
+        message(STATUS ${item})
+        add_custom_command(
+                TARGET Cars
+                POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy_directory "${PROJECT_SOURCE_DIR}/${item}" "${CMAKE_CURRENT_BINARY_DIR}/${item}"
+                COMMENT "Copying ${item}"
+        )
+    endforeach()
+endif()

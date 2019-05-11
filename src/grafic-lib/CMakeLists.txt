@@ -18,6 +18,10 @@ set(GGAME_SOURCE_LIB ../grafic-lib-src/ggame.cpp)
 
 add_library(ggame STATIC ${GGAME_SOURCE_LIB})
 
+set(GENUMS_SOURCE_LIB ../grafic-lib-src/genums.cpp)
+
+add_library(genums STATIC ${GENUMS_SOURCE_LIB})
+
 if (SFML_FOUND)
     include_directories(${SFML_INCLUDE_DIR})
     target_link_libraries(gracer ${SFML_LIBRARIES})
@@ -25,3 +29,8 @@ if (SFML_FOUND)
     target_link_libraries(gwindow ${SFML_LIBRARIES})
     target_link_libraries(ggame ${SFML_LIBRARIES})
 endif ()
+
+include_directories(../lib)
+set(LIBS cars parts base ground)
+target_link_libraries(gracer ${LIBS})
+target_link_libraries(ggame ${LIBS})

@@ -24,10 +24,10 @@ public:
     int getDamage() const;
     double getDamageInterval() const;
 
-    void setSlow(double slow);
-    void setSlippy(double slippy);
-    void setDamage(int damage);
-    void setDamageInterval(double damageInterval);
+    void setSlow(double n_slow);
+    void setSlippy(double n_slippy);
+    void setDamage(int n_damage);
+    void setDamageInterval(double n_damageInterval);
 
     bool wrapGround(const std::shared_ptr<CBaseGround>& w) {
         if (!w) {

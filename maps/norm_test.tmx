@@ -136,6 +136,10 @@
   <object id="136" name="Wall" type="wall" x="128.968" y="789.519" width="12.1045" height="37.9947" rotation="180"/>
  </objectgroup>
  <objectgroup id="2" name="Cars">
-  <object id="1" name="Player" type="playe" x="41.2456" y="538.255" width="41.2456" height="74.2421"/>
+  <object id="1" name="Player" type="player" x="41.2456" y="538.255" width="41.2456" height="74.2421">
+   <properties>
+    <property name="orientation" value="up"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

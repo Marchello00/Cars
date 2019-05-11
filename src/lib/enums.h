@@ -3,6 +3,8 @@
 
 #pragma once
 
+const double EPS = 1e-7;
+
 enum class ECarType {
     STREET, RACE, SUPER
 };

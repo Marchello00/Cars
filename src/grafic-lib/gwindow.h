@@ -26,7 +26,7 @@ public:
 
     void draw(sf::Drawable &l_drawable);
 
-    void draw(TmxLevel &level);
+    sf::RenderWindow *getRenderWindow();
 
 private:
     void setup(const std::string &l_title,
