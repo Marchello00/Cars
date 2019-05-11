@@ -1,23 +1,23 @@
 #include "ground.h"
 
-double CBaseGround::getSlow() const {
-    return slow;
+double CBaseGround::getResistance() const {
+    double ret = resistance;
+    if (wrap) {
+        ret *= wrap->getResistance();
+    }
+    return ret;
 }
 
-void CBaseGround::setSlow(double n_slow) {
-    CBaseGround::slow = n_slow;
-}
-
-double CBaseGround::getSlippy() const {
-    return slippy;
-}
-
-void CBaseGround::setSlippy(double n_slippy) {
-    CBaseGround::slippy = n_slippy;
+void CBaseGround::setResistance(double n_resistance) {
+    CBaseGround::resistance = n_resistance;
 }
 
 int CBaseGround::getDamage() const {
-    return damage;
+    int ret = damage;
+    if (wrap) {
+        ret += wrap->getDamage();
+    }
+    return ret;
 }
 
 void CBaseGround::setDamage(int n_damage) {
@@ -25,7 +25,11 @@ void CBaseGround::setDamage(int n_damage) {
 }
 
 double CBaseGround::getDamageInterval() const {
-    return damage_interval;
+    double ret = damage_interval;
+    if (wrap) {
+        ret += wrap->getDamageInterval();
+    }
+    return ret;
 }
 
 void CBaseGround::setDamageInterval(double n_damageInterval) {

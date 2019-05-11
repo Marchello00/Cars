@@ -20,21 +20,34 @@ Game::Game() :
 Game::~Game() {}
 
 void Game::handleInput() {
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
         m_player.moveForward();
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+    } else {
+        m_player.resetAcceleration();
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
         m_player.moveBackward();
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-        m_player.leftTurn();
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        m_player.rightTurn();
+    } else {
+        m_player.resetDeceleration();
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) ||
+        sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+            m_player.leftTurn();
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+            m_player.rightTurn();
+        }
+    } else {
+        m_player.resetAngle();
     }
 }
 
 void Game::update() {
     m_window.update();
-    CBaseGround ground;
-    m_player.update(getElapsed().asSeconds(), ground);
+    auto bground = std::make_shared<CSlowGround>(3);
+    m_player.update(getElapsed().asSeconds(), bground);
 }
 
 void Game::render() {

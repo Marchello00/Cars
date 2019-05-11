@@ -7,8 +7,7 @@
 
 class CBaseGround {
 protected:
-    double slow;
-    double slippy;
+    double resistance;
     int damage;
     double damage_interval;
 
@@ -16,16 +15,14 @@ protected:
 
 public:
     CBaseGround() :
-            slow(1), slippy(1), damage(0),
-            damage_interval(1) {}
+            resistance(1), damage(0),
+            damage_interval(0) {}
 
-    double getSlow() const;
-    double getSlippy() const;
+    double getResistance() const;
     int getDamage() const;
     double getDamageInterval() const;
 
-    void setSlow(double n_slow);
-    void setSlippy(double n_slippy);
+    void setResistance(double n_resistance);
     void setDamage(int n_damage);
     void setDamageInterval(double n_damageInterval);
 
@@ -38,21 +35,21 @@ public:
     }
 };
 
-class CSlowGround: CBaseGround {
+class CSlowGround: public CBaseGround {
 public:
-    explicit CSlowGround(double slow) {
-        setSlow(slow);
+    explicit CSlowGround(double resistance) {
+        setResistance(resistance);
     }
 };
 
-class CSlippyGround: CBaseGround {
+class CSlippyGround: public CBaseGround {
 public:
-    explicit CSlippyGround(double slippy) {
-        setSlippy(slippy);
+    explicit CSlippyGround(double resistance) {
+        setResistance(1 / resistance);
     }
 };
 
-class CDamageGround: CBaseGround {
+class CDamageGround: public CBaseGround {
 public:
     explicit CDamageGround(int damage, double interval) {
         setDamage(damage);

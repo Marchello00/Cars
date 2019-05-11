@@ -346,7 +346,7 @@ public:
     enum class PEPPER {
         MAX_SPEED = 80,
         ACCELERATION = 6,
-        DECELERATION = 4,
+        DECELERATION = 10,
         WEIGHT = 500,
         LIVES = 10,
         ARMOR = 0,
@@ -360,7 +360,7 @@ public:
     enum class OVERRUNNER {
         MAX_SPEED = 120,
         ACCELERATION = 8,
-        DECELERATION = 6,
+        DECELERATION = 14,
         WEIGHT = 400,
         LIVES = 20,
         ARMOR = 0,
@@ -374,7 +374,7 @@ public:
     enum class THUNDERBOLT {
         MAX_SPEED = 200,
         ACCELERATION = 10,
-        DECELERATION = 8,
+        DECELERATION = 16,
         WEIGHT = 350,
         LIVES = 30,
         ARMOR = 0,

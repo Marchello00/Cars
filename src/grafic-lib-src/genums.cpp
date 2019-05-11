@@ -3,7 +3,7 @@
 
 int enums::getRotation(std::string &s) {
     enum ROTATION {
-        LEFT = 0, UP = 90, RIGHT = 180, DOWN = 270
+        RIGHT = 0, DOWN = 90, LEFT = 180, UP = 270
     };
 
     if (s == "left") {

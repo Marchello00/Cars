@@ -19,13 +19,11 @@ public:
 
     void setImage(const std::string &path);
 
-    void update(float tm, const CBaseGround &ground);
+    void update(float tm, const std::shared_ptr<CBaseGround> &ground);
 
     void render(sf::RenderWindow &window);
 
     void setCar(std::shared_ptr<CCar> new_car);
-
-    void setSpeedE(float newSpeedE);
 
     void leftTurn();
 
@@ -35,14 +33,21 @@ public:
 
     void moveBackward();
 
+    void resetDeceleration();
+
+    void resetAcceleration();
+
+    void resetAngle();
+
 private:
 
     sf::Vector2f position;
 
     sf::Vector2f speed;
-    double speedE = DEFAULT_SPEED_E; // convert constants from enums to real speed
+    sf::Vector2f acc;
     float angle;
     float acceleration;
+    float deceleration;
 
     int w = CAR_WIDTH, h = CAR_HEIGHT;
     sf::Texture texture;
@@ -51,11 +56,17 @@ private:
 
     std::shared_ptr<CCar> car;
 
-    void changeSpeed(float tm, const CBaseGround &ground);
+    void changeSpeed(float tm, const std::shared_ptr<CBaseGround> &ground);
 
-    double getAcceleration(const CBaseGround &ground);
+    sf::Vector2f changeAcceleration(const std::shared_ptr<CBaseGround> &ground);
 
     bool isMoving();
+
+    float getRadian();
+
+    bool movingForward;
+
+    float getMovingAngle();
 };
 
 #endif //CARS_GRACER_H
