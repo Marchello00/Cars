@@ -10,8 +10,8 @@ Game::Game() :
     auto player_obj = m_level.getAllObjects("Player")[0];
     auto prect = player_obj.rect;
     m_player.setPosition({prect.left + prect.width / 2, prect.top + prect.height / 2});
-    auto rotation = player_obj.getPropertyString("orientation");
-    m_player.setRotation(enums::getRotation(rotation));
+    auto direction = player_obj.getPropertyString("orientation");
+    m_player.setDirection(enums::getDirection(direction));
     IStreetCarBuilder carBuilder;
     carBuilder.create(ECarName::PEPPER);
     m_player.setCar(carBuilder.getCar());
@@ -24,23 +24,22 @@ void Game::handleInput() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
         m_player.moveForward();
     } else {
-        m_player.resetAcceleration();
+        m_player.reactForward();
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
         m_player.moveBackward();
     } else {
-        m_player.resetDeceleration();
+        m_player.reactBackward();
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) ||
-        sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-            m_player.leftTurn();
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-            m_player.rightTurn();
-        }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+        m_player.leftTurn(getElapsed().asSeconds());
     } else {
-        m_player.resetAngle();
+        m_player.reactLeft(getElapsed().asSeconds());
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+        m_player.rightTurn(getElapsed().asSeconds());
+    } else {
+        m_player.reactRight(getElapsed().asSeconds());
     }
 }
 

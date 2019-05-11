@@ -1,4 +1,5 @@
 #include <string>
+
 #include "../grafic-lib/genums.h"
 
 int enums::getRotation(std::string &s) {
@@ -17,4 +18,18 @@ int enums::getRotation(std::string &s) {
     }
 
     return 0;
+}
+
+sf::Vector2f enums::getDirection(std::string &s) {
+    if (s == "left") {
+        return {-1, 0};
+    } else if (s == "down") {
+        return {0, 1};
+    } else if (s == "right") {
+        return {1, 0};
+    } else if (s == "up") {
+        return {0, -1};
+    }
+
+    return {0, 0};
 }

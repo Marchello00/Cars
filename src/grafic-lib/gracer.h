@@ -15,7 +15,7 @@ public:
 
     void setPosition(sf::Vector2f newPosition);
 
-    void setRotation(double alpha);
+    void setDirection(sf::Vector2f dir);
 
     void setImage(const std::string &path);
 
@@ -25,31 +25,38 @@ public:
 
     void setCar(std::shared_ptr<CCar> new_car);
 
-    void leftTurn();
+    void leftTurn(float tm);
 
-    void rightTurn();
+    void reactLeft(float tm);
+
+    void rightTurn(float tm);
+
+    void reactRight(float tm);
 
     void moveForward();
 
     void moveBackward();
 
-    void resetDeceleration();
+    void reactBackward();
 
-    void resetAcceleration();
+    void reactForward();
 
-    void resetAngle();
 
 private:
 
-    sf::Vector2f position;
+    CAR_STATE state;
 
-    sf::Vector2f speed;
-    sf::Vector2f acc;
-    float angle;
+    sf::Vector2f direction;
+
+    sf::Vector2f position;
+    float speed;
     float acceleration;
+
     float deceleration;
 
+    float wheel;
     int w = CAR_WIDTH, h = CAR_HEIGHT;
+
     sf::Texture texture;
 
     sf::Sprite sprite;
@@ -58,15 +65,9 @@ private:
 
     void changeSpeed(float tm, const std::shared_ptr<CBaseGround> &ground);
 
-    sf::Vector2f changeAcceleration(const std::shared_ptr<CBaseGround> &ground);
+    sf::Vector2f getAcceleration(const std::shared_ptr<CBaseGround> &ground);
 
-    bool isMoving();
-
-    float getRadian();
-
-    bool movingForward;
-
-    float getMovingAngle();
+    float getAngle();
 };
 
 #endif //CARS_GRACER_H

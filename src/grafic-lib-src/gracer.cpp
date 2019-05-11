@@ -4,8 +4,12 @@
 #include <cmath>
 #include <iostream>
 
-double toDegrees(double radians) {
-    return radians / M_PI * 180.0;
+float toDegrees(float radians) {
+    return radians / M_PI * 180.0f;
+}
+
+float toRadians(float degrees) {
+    return degrees / 180.0f * M_PI;
 }
 
 double operator%(const sf::Vector2f &a, const sf::Vector2f &b) {
@@ -16,32 +20,30 @@ double operator*(const sf::Vector2f &a, const sf::Vector2f &b) {
     return a.x * b.y - a.y * b.x;
 }
 
-double getAngle(const sf::Vector2f &a, const sf::Vector2f &b) {
-    return toDegrees(atan2(a * b, a % b));
+//double getAngle(const sf::Vector2f &a, const sf::Vector2f &b) {
+//    return toDegrees(atan2(a * b, a % b));
+//}
+
+sf::Vector2f rotate(const sf::Vector2f &a, float angle) {
+    angle = toRadians(angle);
+    return {a.x * cos(angle) - a.y * sin(angle),
+            a.x * sin(angle) + a.y * cos(angle)};
 }
 
 Racer::Racer() :
-        position({0, 0}), speed({0, 0}),
-        acceleration(0), angle(0),
-        deceleration(0), movingForward(true) {}
+        position({0, 0}), speed(0),
+        acceleration(0),
+        deceleration(0), state(CAR_STATE::STAY),
+        wheel(0), direction({1, 0}) {}
 
 void Racer::update(float tm, const std::shared_ptr<CBaseGround> &ground) {
-    setPosition({position.x + speed.x * tm,
-                 position.y + speed.y * tm});
+    setPosition(position + direction * speed * tm);
     changeSpeed(tm, ground);
 }
 
 void Racer::render(sf::RenderWindow &window) {
     sprite.setPosition(position);
-    if (isMoving()) {
-        double spAngle = getMovingAngle();
-        if (!movingForward) {
-            spAngle += 180;
-        }
-        sprite.setRotation(spAngle);
-    } else {
-        sprite.setRotation(angle);
-    }
+    sprite.setRotation(toDegrees(getAngle()));
     window.draw(sprite);
 }
 
@@ -56,105 +58,144 @@ void Racer::setImage(const std::string &path) {
     sprite.setScale(1.0 * h / texture.getSize().x, 1.0 * w / texture.getSize().y);
 }
 
-void Racer::setRotation(double alpha) {
-    angle = alpha;
-}
-
 void Racer::setCar(std::shared_ptr<CCar> new_car) {
     car = std::move(new_car);
 }
 
 void Racer::changeSpeed(float tm, const std::shared_ptr<CBaseGround> &ground) {
-    changeAcceleration(ground);
-    auto old = speed;
-    speed.x += acc.x * tm;
-    speed.y += acc.y * tm;
-    if (old % speed < 0 && acceleration == 0 && deceleration == 0) {
-        speed.x = 0, speed.y = 0;
+    if (state == CAR_STATE::STAY) {
+        return;
     }
-    movingForward = (acceleration - deceleration > 0 && acc % speed > 0) ||
-                    (acceleration - deceleration < 0 && acc % speed < 0);
-    if (hypot(speed.x, speed.y) > car->getMaxSpeed() * DEFAULT_SPEED_E) {
-        double mult = car->getMaxSpeed() * DEFAULT_SPEED_E / hypot(speed.x, speed.y);
-        speed.x *= mult;
-        speed.y *= mult;
+    if (state == CAR_STATE::BACKWARD) {
+        speed *= -1;
     }
-}
+    auto acc = acceleration - deceleration - ground->getResistance();
+    speed += acc * tm;
+    speed = fmax(speed, 0);
+    speed = fmin(speed, car->getMaxSpeed() * DEFAULT_SPEED_E);
 
-bool Racer::isMoving() {
-    return hypot(speed.x, speed.y) >= EPS;
-}
-
-sf::Vector2f Racer::changeAcceleration(const std::shared_ptr<CBaseGround> &ground) {
-    float acc_diff = acceleration - deceleration;
-    acc = {acc_diff * cos(getRadian()), acc_diff * sin(getRadian())};
-    if (isMoving()) {
-        auto resist = -speed;
-        resist.x /= hypot(speed.x, speed.y);
-        resist.y /= hypot(speed.x, speed.y);
-        resist.x *= ground->getResistance();
-        resist.y *= ground->getResistance();
-        acc += resist;
+    if (speed == 0) {
+        state = CAR_STATE::STAY;
+        wheel = 0;
     }
-    return acc;
-}
 
-void Racer::leftTurn() {
-    if (isMoving()) {
-        if (acc % speed < 0) {
-            if (getAngle(acc, speed) > 90 - STOP_ROTATE) {
-                angle -= ANGLE_CHANGE_SPEED;
-            }
-        } else {
-            if (getAngle(acc, speed) < STOP_ROTATE) {
-                angle -= ANGLE_CHANGE_SPEED;
-            }
-        }
+    double wheelHere = wheel;
+
+    if (state == CAR_STATE::BACKWARD) {
+        speed *= -1;
+        wheelHere = -wheelHere;
     }
-}
 
-float Racer::getMovingAngle() {
-    if (isMoving()) {
-        return toDegrees(atan2(speed.y, speed.x));
+    direction = rotate(direction, wheelHere);
+    std::cout << "Speed: " << speed <<
+              ", State: " << int(state) << ", Wheel :" << wheel << ", Acc: " << acc <<
+              ", Dir: {" << direction.x << ", " << direction.y << "}\n";
+    /*
+    auto acc = getAcceleration(ground);
+    auto sp = direction * speed;
+    auto old = sp;
+    sp.x += acc.x * tm;
+    sp.y += acc.y * tm;
+    if (old % sp < 0) {
+        speed = 0;
+        state = CAR_STATE::STAY;
     } else {
-        return angle;
+        speed = hypot(sp.y, sp.x);
+        if (state == CAR_STATE::BACKWARD) {
+            speed = -speed;
+        }
+        sp.x /= speed;
+        sp.y /= speed;
+        direction = sp;
+        speed = fmin(speed, car->getMaxSpeed() * DEFAULT_SPEED_E);
+    }
+    std::cout << "Speed: " << speed <<
+    ", State: " << int(state) << ", Wheel :" << wheel <<
+    ", Acc: {" << acc.x << ", " << acc.y << "}, Dir: {" << direction.x << ", " << direction.y << "}\n";*/
+}
+
+sf::Vector2f Racer::getAcceleration(const std::shared_ptr<CBaseGround> &ground) {
+    float accValue = acceleration - deceleration - ground->getResistance();
+    float wheelAngle = wheel;
+    auto acc = direction * accValue;
+    if (state == CAR_STATE::BACKWARD) {
+        acc = -acc;
+        wheelAngle = -wheelAngle;
+    }
+    return rotate(acc, wheelAngle);
+}
+
+void Racer::leftTurn(float tm) {
+    if (state == CAR_STATE::STAY) return;
+    if (wheel > -STOP_ROTATE) {
+        wheel -= WHEEL_ROTATE_SPEED * tm;
     }
 }
 
-void Racer::rightTurn() {
-    if (isMoving()) {
-        if (acc % speed < 0) {
-            if (getAngle(acc, speed) > 90 - STOP_ROTATE) {
-                angle += ANGLE_CHANGE_SPEED;
-            }
-        } else {
-            if (getAngle(acc, speed) < STOP_ROTATE) {
-                angle += ANGLE_CHANGE_SPEED;
-            }
-        }
+
+void Racer::rightTurn(float tm) {
+    if (state == CAR_STATE::STAY) return;
+    if (wheel < STOP_ROTATE) {
+        wheel += WHEEL_ROTATE_SPEED * tm;
     }
 }
 
 void Racer::moveForward() {
-    acceleration = car->getAcceleration() * DEFAULT_ACCELERATION_E;
+    if (state == CAR_STATE::STAY) {
+        state = CAR_STATE::FORWARD;
+    }
+    if (state != CAR_STATE::BACKWARD) {
+        acceleration = car->getAcceleration() * DEFAULT_ACCELERATION_E;
+    } else {
+        deceleration = car->getDeceleration() * DEFAULT_ACCELERATION_E;
+    }
 }
 
 void Racer::moveBackward() {
-    deceleration = car->getDeceleration() * DEFAULT_ACCELERATION_E;
+    if (state == CAR_STATE::STAY) {
+        state = CAR_STATE::BACKWARD;
+    }
+    if (state != CAR_STATE::FORWARD) {
+        acceleration = car->getAcceleration() * DEFAULT_ACCELERATION_E;
+    } else {
+        deceleration = car->getDeceleration() * DEFAULT_ACCELERATION_E;
+    }
 }
 
-float Racer::getRadian() {
-    return angle / 180.0 * M_PI;
+void Racer::reactBackward() {
+    if (state != CAR_STATE::FORWARD) {
+        acceleration = 0;
+    }
+    if (state != CAR_STATE::BACKWARD) {
+        deceleration = 0;
+    }
 }
 
-void Racer::resetDeceleration() {
-    deceleration = 0;
+void Racer::reactForward() {
+    if (state != CAR_STATE::BACKWARD) {
+        acceleration = 0;
+    }
+    if (state != CAR_STATE::FORWARD) {
+        deceleration = 0;
+    }
 }
 
-void Racer::resetAcceleration() {
-    acceleration = 0;
+void Racer::reactLeft(float tm) {
+    if (wheel < 0) {
+        wheel = fmin(0, wheel + WHEEL_BACK_SPEED * tm);
+    }
 }
 
-void Racer::resetAngle() {
-    angle = getMovingAngle();
+void Racer::reactRight(float tm) {
+    if (wheel > 0) {
+        wheel = fmax(0, wheel - WHEEL_BACK_SPEED * tm);
+    }
+}
+
+float Racer::getAngle() {
+    return atan2(direction.y, direction.x);
+}
+
+void Racer::setDirection(sf::Vector2f dir) {
+    direction = dir;
 }
