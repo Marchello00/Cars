@@ -1,6 +1,8 @@
 #ifndef CARS_CARS_H
 #define CARS_CARS_H
 
+#pragma once
+
 #include <memory>
 #include <map>
 #include "enums.h"
@@ -82,9 +84,5 @@ public:
 
     ~ISuperCarBuilder() override = default;
 };
-
-#define CARS_ADDED
-
-#include "../lib-src/cars.cpp"
 
 #endif //CARS_CARS_H

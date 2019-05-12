@@ -1,6 +1,4 @@
-#ifndef CAR_ADDED
 #include "../lib/cars.h"
-#endif
 
 std::shared_ptr<CPart> ICarBuilder::addPart(std::shared_ptr<CPart> part) {
     auto &place = parts[part->partType];

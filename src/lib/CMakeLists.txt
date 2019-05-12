@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.9)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -14,6 +14,10 @@ set(PARTS_SOURCE_LIB ../lib-src/parts.cpp)
 
 add_library(parts STATIC ${PARTS_SOURCE_LIB})
 
-set(CONTAINER_SOURCE_LIB ../lib-src/container.cpp)
+set(BONUS_SOURCE_LIB ../lib-src/bonus.cpp)
 
-add_library(container STATIC ${CONTAINER_SOURCE_LIB})
+add_library(bonus STATIC ${BONUS_SOURCE_LIB})
+
+set(GROUND_SOURCE_LIB ../lib-src/ground.cpp)
+
+add_library(ground STATIC ${GROUND_SOURCE_LIB})

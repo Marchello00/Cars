@@ -1,7 +1,10 @@
 #ifndef CARS_BASE_H
 #define CARS_BASE_H
 
+#pragma once
+
 #include "enums.h"
+#include <memory>
 
 class CBase {
 protected:
