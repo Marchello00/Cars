@@ -3,9 +3,13 @@
 
 #pragma once
 
+class ICommand;
+
 #include "gwindow.h"
 #include "glevel.h"
 #include "gracer.h"
+#include "gbonus.h"
+#include "gcommand.h"
 
 class TextShow {
 public:
@@ -43,6 +47,8 @@ public:
 
     void restartClock();
 
+    void addBonus(const std::shared_ptr<GBonus>& b);
+
 private:
     Window m_window;
 
@@ -54,6 +60,13 @@ private:
     float m_accumulate_elapsed;
 
     TextShow m_textShow;
+
+    std::vector<std::shared_ptr<GBonus>> bonus;
+
+    std::vector<std::shared_ptr<ICommand>> commands;
+
+    void generatePoints(int n = DEFAULT_POINTS_NUMBER);
+    void generateHeal();
 };
 
 #endif //CARS_GGAME_H

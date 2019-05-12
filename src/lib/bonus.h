@@ -6,17 +6,11 @@
 #include "base.h"
 #include "enums.h"
 
-class CBaseBonus : CBase {
-private:
-    double liveTm;
-    double startTm;
+class CPoint {
 public:
-    explicit CBaseBonus(ECarType carType) :
-            CBase(carType), liveTm(0), startTm(0) {}
-};
-
-class CHealthBonus : CBaseBonus {
-
+    CPoint(int score);
+private:
+    int score;
 };
 
 #endif //CARS_BONUS_H

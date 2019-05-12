@@ -22,15 +22,27 @@ set(GENUMS_SOURCE_LIB ../grafic-lib-src/genums.cpp)
 
 add_library(genums STATIC ${GENUMS_SOURCE_LIB})
 
+set(GCOMMAND_SOURCE_LIB ../grafic-lib-src/gcommand.cpp)
+
+add_library(gcommand STATIC ${GCOMMAND_SOURCE_LIB})
+
+set(GBONUS_SOURCE_LIB ../grafic-lib-src/gbonus.cpp)
+
+add_library(gbonus STATIC ${GBONUS_SOURCE_LIB})
+
 if (SFML_FOUND)
     include_directories(${SFML_INCLUDE_DIR})
     target_link_libraries(gracer ${SFML_LIBRARIES})
     target_link_libraries(glevel ${SFML_LIBRARIES})
     target_link_libraries(gwindow ${SFML_LIBRARIES})
     target_link_libraries(ggame ${SFML_LIBRARIES})
+    target_link_libraries(gcommand ${SFML_LIBRARIES})
+    target_link_libraries(gbonus ${SFML_LIBRARIES})
 endif ()
 
 include_directories(../lib)
-set(LIBS cars parts base ground)
+set(LIBS cars parts base ground bonus)
 target_link_libraries(gracer ${LIBS})
 target_link_libraries(ggame ${LIBS})
+target_link_libraries(gcommand ${LIBS})
+target_link_libraries(gracer gbonus)

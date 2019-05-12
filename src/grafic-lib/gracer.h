@@ -3,10 +3,15 @@
 
 #pragma once
 
+class GBonus;
+class GPoint;
+class GHeal;
+
 #include <SFML/Graphics.hpp>
 #include "genums.h"
 #include "ground.h"
 #include "cars.h"
+#include "gbonus.h"
 #include <src/helpers-lib/TmxLevel.h>
 
 class GRacer {
@@ -20,7 +25,7 @@ public:
 
     void setImage(const std::string &path);
 
-    void update(float tm, float &accumulate_tm);
+    void update(float tm, float &accumulate_tm, const std::vector<std::shared_ptr<GBonus>> &bonuses);
 
     void render(sf::RenderWindow &window);
 
@@ -46,13 +51,34 @@ public:
 
     void addObject(TmxObject &obj);
 
+    void applyPoint(GPoint &point);
+
+    void applyHeal(GHeal &heal);
+
+    void setGoal(int g);
+
+    int getGoal() const;
+
+    int getScore() const;
+
     std::string getText();
 
     sf::ConvexShape shape();
 
     bool intersect(const sf::FloatRect &fr);
 
+    void setMission(const std::string &m);
+
+    void setMissionScore();
+
+    void setPieMessage();
+
 private:
+    std::string mission;
+
+    int goal = 0;
+
+    int score = 0;
 
     CAR_STATE state;
 
@@ -87,6 +113,10 @@ private:
     bool checkWalls();
 
     bool checkBorders();
+
+    void checkLives();
+
+    void analyseBonuses(const std::vector<std::shared_ptr<GBonus>> &bonuses);
 
     std::vector<TmxObject> objects;
     std::vector<sf::FloatRect> walls;

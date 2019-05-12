@@ -19,7 +19,7 @@ if (SFML_FOUND)
     target_link_libraries(Cars ${SFML_LIBRARIES})
 endif ()
 
-set(GRAPHICAL_LIBS gracer ggame glevel gwindow genums)
+set(GRAPHICAL_LIBS gracer ggame glevel gwindow genums gcommand)
 
 target_link_libraries(Cars ${GRAPHICAL_LIBS})
 target_link_libraries(Cars tinyxml2)

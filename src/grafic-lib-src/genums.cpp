@@ -22,13 +22,13 @@ int enums::getRotation(std::string &s) {
 
 sf::Vector2f enums::getDirection(std::string &s) {
     if (s == "left") {
-        return {-1, 0};
+        return LEFT;
     } else if (s == "down") {
-        return {0, 1};
+        return DOWN;
     } else if (s == "right") {
-        return {1, 0};
+        return RIGHT;
     } else if (s == "up") {
-        return {0, -1};
+        return UP;
     }
 
     return {0, 0};
