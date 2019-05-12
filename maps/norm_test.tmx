@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE map SYSTEM "http://mapeditor.org/dtd/1.0/map.dtd">
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="8" height="8" tilewidth="128" tileheight="128" infinite="0" nextlayerid="6" nextobjectid="137">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="8" height="8" tilewidth="128" tileheight="128" infinite="0" nextlayerid="7" nextobjectid="154">
  <tileset firstgid="1" name="Road" tilewidth="128" tileheight="128" spacing="2" tilecount="465" columns="31">
   <image source="../images/racing-pack/Spritesheets/spritesheet_tiles.png" width="4096" height="2048"/>
  </tileset>
@@ -22,7 +22,7 @@
 166,0,0,166,0,166,0,166,
 166,0,0,166,0,166,0,166,
 19,0,0,2684354610,1610612902,50,0,166,
-264,0,0,0,0,0,0,166,
+264,0,0,0,0,0,0,419,
 3221225891,1610612902,1610612902,1610612902,1610612902,1610612902,1610612902,419,
 1610612987,63,63,63,63,63,63,2684354811,
 2684354665,1610613147,1610613147,1610613147,1610613147,1610613147,1610613147,105
@@ -39,7 +39,6 @@
   <object id="11" name="Wall" type="wall" x="637.245" y="117.55" width="20.6228" height="257.785"/>
   <object id="12" name="Wall" type="wall" x="111.363" y="637.245" width="798.103" height="22.6851"/>
   <object id="14" name="Wall" type="wall" x="756.857" y="107.239" width="146.422" height="18.5605"/>
-  <object id="15" name="Wall" type="wall" x="890.905" y="111.363" width="22.6851" height="534.131"/>
   <object id="29" name="Wall" type="wall" x="388.012" y="417.35" width="20.134" height="15.2443"/>
   <object id="30" name="Wall" type="wall" x="391.176" y="426.554" width="19.5588" height="12.0804"/>
   <object id="31" name="Wall" type="wall" x="399.517" y="436.046" width="14.3815" height="22.4351"/>
@@ -134,6 +133,7 @@
   <object id="134" name="Wall" type="wall" x="125.906" y="916.088" width="12.1045" height="37.9947" rotation="180"/>
   <object id="135" name="Wall" type="wall" x="116.527" y="783.803" width="5.71601" height="27.5714" rotation="180"/>
   <object id="136" name="Wall" type="wall" x="128.968" y="789.519" width="12.1045" height="37.9947" rotation="180"/>
+  <object id="144" name="Wall" type="wall" x="889.853" y="104.901" width="23.5124" height="405.137"/>
  </objectgroup>
  <objectgroup id="2" name="Cars">
   <object id="1" name="Player" type="player" x="41.2456" y="538.255" width="41.2456" height="74.2421">
@@ -141,5 +141,54 @@
     <property name="orientation" value="up"/>
    </properties>
   </object>
+ </objectgroup>
+ <objectgroup id="6" name="Surface">
+  <object id="137" name="Surface" type="slow" x="23.5124" y="765.057" width="982.094" height="130.222">
+   <properties>
+    <property name="material" value="sand"/>
+   </properties>
+  </object>
+  <object id="138" name="Surface" type="damage" x="16.2778" y="895.279" width="991.138" height="112.136">
+   <properties>
+    <property name="material" value="dirt"/>
+   </properties>
+  </object>
+  <object id="139" name="Surface" type="slow" x="126.605" y="126.605" width="255.019" height="510.038">
+   <properties>
+    <property name="material" value="grass"/>
+   </properties>
+  </object>
+  <object id="140" name="Surface" type="slow" x="510.038" y="126.605" width="126.605" height="253.21">
+   <properties>
+    <property name="material" value="grass"/>
+   </properties>
+  </object>
+  <object id="141" name="Surface" type="slow" x="766.866" y="128.414" width="124.797" height="510.038">
+   <properties>
+    <property name="material" value="grass"/>
+   </properties>
+  </object>
+  <object id="142" name="Surface" type="slow" x="381.624" y="510.038" width="385.241" height="126.605">
+   <properties>
+    <property name="material" value="grass"/>
+   </properties>
+  </object>
+  <object id="145" name="Surface" type="slow" x="726.174" y="461.975" width="41.0478" height="49.2574">
+   <properties>
+    <property name="material" value="grass"/>
+   </properties>
+  </object>
+  <object id="146" name="Surface" type="slow" x="382.271" y="452.755" width="41.4611" height="58.0455">
+   <properties>
+    <property name="material" value="grass"/>
+   </properties>
+  </object>
+  <object id="147" name="Surface" type="usual" x="-1.20992" y="1.20992" width="124.622" height="763.46"/>
+  <object id="148" name="Surface" type="usual" x="1.20992" y="2.41984" width="1021.17" height="122.202"/>
+  <object id="149" name="Surface" type="usual" x="400.484" y="125.832" width="106.473" height="361.766"/>
+  <object id="150" name="Surface" type="usual" x="658.197" y="125.832" width="91.954" height="366.606"/>
+  <object id="151" name="Surface" type="usual" x="508.167" y="401.694" width="146.4" height="85.9044"/>
+  <object id="152" name="Surface" type="usual" x="911.071" y="122.202" width="90.7441" height="642.468"/>
+  <object id="153" name="Surface" type="usual" x="123.412" y="660.617" width="787.659" height="84.6945"/>
  </objectgroup>
 </map>

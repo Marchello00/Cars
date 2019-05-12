@@ -33,3 +33,21 @@ sf::Vector2f enums::getDirection(std::string &s) {
 
     return {0, 0};
 }
+
+std::shared_ptr<CBaseGround> enums::getGround(const std::string &type, const std::string &material) {
+    if (type == "slow") {
+        if (material == "grass") {
+            return std::make_shared<CSlowGround>(SLOW_GRASS_RESISTANCE);
+        }
+        if (material == "sand") {
+            return std::make_shared<CSlowGround>(SLOW_SAND_RESISTANCE);
+        }
+    }
+    if (type == "damage") {
+        if (material == "dirt") {
+            return std::make_shared<CDamageGround>(DAMAGE_DIRT_DAMAGE,
+                                                   DAMAGE_DIRT_INTERVAL);
+        }
+    }
+    return std::make_shared<CBaseGround>();
+}

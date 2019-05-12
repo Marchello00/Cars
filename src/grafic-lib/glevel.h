@@ -4,7 +4,15 @@
 #pragma once
 
 #include "TmxLevel.h"
+#include "gracer.h"
 
-typedef TmxLevel Level;
+class GLevel: public TmxLevel {
+public:
+    void addRacer(GRacer *racer);
+
+    void notify();
+private:
+    std::vector<GRacer *> racers;
+};
 
 #endif //CARS_GLEVEL_H

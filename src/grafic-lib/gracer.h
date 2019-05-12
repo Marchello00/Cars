@@ -7,11 +7,12 @@
 #include "genums.h"
 #include "ground.h"
 #include "cars.h"
+#include <src/helpers-lib/TmxLevel.h>
 
-class Racer {
+class GRacer {
 public:
 
-    Racer();
+    GRacer();
 
     void setPosition(sf::Vector2f newPosition);
 
@@ -19,7 +20,7 @@ public:
 
     void setImage(const std::string &path);
 
-    void update(float tm, const std::shared_ptr<CBaseGround> &ground);
+    void update(float tm, float &accumulate_tm);
 
     void render(sf::RenderWindow &window);
 
@@ -41,6 +42,15 @@ public:
 
     void reactForward();
 
+    void setField(sf::Vector2f sz);
+
+    void addObject(TmxObject &obj);
+
+    std::string getText();
+
+    sf::ConvexShape shape();
+
+    bool intersect(const sf::FloatRect &fr);
 
 private:
 
@@ -54,8 +64,11 @@ private:
 
     float deceleration;
 
+    int lives;
+
     float wheel;
     int w = CAR_WIDTH, h = CAR_HEIGHT;
+    sf::FloatRect border;
 
     sf::Texture texture;
 
@@ -63,11 +76,23 @@ private:
 
     std::shared_ptr<CCar> car;
 
-    void changeSpeed(float tm, const std::shared_ptr<CBaseGround> &ground);
-
-    sf::Vector2f getAcceleration(const std::shared_ptr<CBaseGround> &ground);
+    void changeSpeed(float tm);
 
     float getAngle();
+
+    void analyseObjects();
+
+    void checkDamage(float &accumulate_tm);
+
+    bool checkWalls();
+
+    bool checkBorders();
+
+    std::vector<TmxObject> objects;
+    std::vector<sf::FloatRect> walls;
+    std::shared_ptr<CBaseGround> ground;
+
+    std::string debug;
 };
 
 #endif //CARS_GRACER_H

@@ -7,6 +7,22 @@
 #include "glevel.h"
 #include "gracer.h"
 
+class TextShow {
+public:
+    void draw(sf::RenderWindow &window);
+
+    void addText(const std::string &ntext);
+
+    bool setFont(const std::string &path);
+
+    void clear();
+
+private:
+    std::string text;
+
+    sf::Font font;
+};
+
 class Game {
 public:
     Game();
@@ -23,16 +39,21 @@ public:
 
     sf::Time getElapsed();
 
+    float &getAccumulateElapsed();
+
     void restartClock();
 
 private:
     Window m_window;
 
-    Level m_level;
-    Racer m_player;
+    GLevel m_level;
+    GRacer m_player;
 
     sf::Clock m_clock;
     sf::Time m_elapsed;
+    float m_accumulate_elapsed;
+
+    TextShow m_textShow;
 };
 
 #endif //CARS_GGAME_H

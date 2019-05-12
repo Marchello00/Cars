@@ -63,7 +63,7 @@ public:
     // Принимает любую цель для рисования, например, sf::RenderWindow.
     void render(sf::RenderTarget &target) const;
 
-private:
+protected:
     int m_width = 0;
     int m_height = 0;
     int m_tileWidth = 0;
