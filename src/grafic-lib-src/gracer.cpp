@@ -30,10 +30,6 @@ double operator*(const sf::Vector2f &a, const sf::Vector2f &b) {
     return a.x * b.y - a.y * b.x;
 }
 
-//double getAngle(const sf::Vector2f &a, const sf::Vector2f &b) {
-//    return toDegrees(atan2(a * b, a % b));
-//}
-
 sf::Vector2f rotate(const sf::Vector2f &a, float angle) {
     angle = toRadians(angle);
     return {a.x * cos(angle) - a.y * sin(angle),
@@ -61,6 +57,11 @@ void GRacer::update(float tm, float &accumulate_tm) {
 void GRacer::render(sf::RenderWindow &window) {
     sprite.setPosition(position);
     sprite.setRotation(toDegrees(getAngle()));
+    if (ground->getDamage()) {
+        sprite.setColor(sf::Color::Red);
+    } else {
+        sprite.setColor(sf::Color::White);
+    }
     window.draw(sprite);
 }
 
@@ -194,7 +195,7 @@ void GRacer::analyseObjects() {
 //    std::set<std::pair<std::string, std::string>> was_grounds;
     ground = std::make_shared<CBaseGround>();
     walls.clear();
-    debug += "Objects: " + to_string(objects.size()) + "\n";
+//    debug += "Objects: " + to_string(objects.size()) + "\n";
     std::vector<std::shared_ptr<CBaseGround>> v;
     for (auto &object : objects) {
         if (object.type == "wall") {
@@ -216,11 +217,6 @@ void GRacer::analyseObjects() {
         return a->getDamage() < b->getDamage() || (a->getDamage() == b->getDamage() &&
                                                           a->getResistance() < b->getResistance());
     });
-    debug += "V: ";
-    for (auto vv : v) {
-        debug += "(" + to_string(vv->getResistance()) + ", " + to_string(vv->getDamage()) + ") ";
-    }
-    debug += '\n';
     if (!v.empty()) {
         ground = v[0];
     }
